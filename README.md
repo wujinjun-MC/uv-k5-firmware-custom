@@ -1,3 +1,18 @@
+**LOSEHU 原固件的修改版**
+
+修改内容:
+
+1. Makefile 更改默认编译配置、作者名字
+2. 保持发射报警声(不会每10秒切换本地和远程报警模式)
+3. "1750HZ" 声调改为500Hz(用于莫尔斯电码)
+4. 一些500Hz的警报声现在是1000Hz
+5. 最大发射时间限制从15min改为30min
+6. 声控发射: 60秒无声音才停止发射(用于更好发射音乐)
+7. 短信: 短按下(C)键重新发送上一条信息、长按下键清除待发送内容(不丢失短信记录)
+8. Windows编译批处理(win_make.bat): "make full"改成"make build"，只按照Makefile里面的编译选项进行编译
+
+已编译固件: ./LOSEHU132*.bin
+
 **Read this in other languages: [English](./README_en.md), [中文](./README.md).**
 
 **语言版本: [English](./README_en.md), [中文](./README.md).**

@@ -115,16 +115,16 @@ void PINYIN_SOLVE(uint32_t tmp) {
     }
 
     if (INPUT_STAGE) {
-        //–Ë“™—°∆¥“Ù
+        //ÈúÄË¶ÅÈÄâÊãºÈü≥
         if (PINYIN_SEARCH_FOUND) {
             if (PINYIN_SEARCH_INDEX != 255) {
-                //»∑ µ¥Ê‘⁄’‚∏ˆ∆¥“Ù◊È∫œ
+                //Á°ÆÂÆûÂ≠òÂú®Ëøô‰∏™ÊãºÈü≥ÁªÑÂêà
                 PINYIN_NOW_INDEX = PINYIN_SEARCH_INDEX;
                 PINYIN_NOW_NUM = PINYIN_SEARCH_NUM;
                 PINYIN_SEARCH_MODE = 1;
             }
         } else {
-            //√ª”–’‚∏ˆ∆¥“Ù◊È∫œµ´ «”–±∏—°
+            //Ê≤°ÊúâËøô‰∏™ÊãºÈü≥ÁªÑÂêà‰ΩÜÊòØÊúâÂ§áÈÄâ
 //            PINYIN_SEARCH_MODE = 2;
 //            PINYIN_NOW_INDEX = PINYIN_SEARCH_INDEX;
 //            PINYIN_NOW_NUM = PINYIN_SEARCH_NUM;
@@ -582,7 +582,7 @@ void MENU_AcceptSetting(void) {
 
             return;
 #endif
-        case MENU_MEM_NAME: // ‰»Î∑®
+        case MENU_MEM_NAME: //ËæìÂÖ•Ê≥ï
             // trailing trim
             for (int i = MAX_EDIT_INDEX - 1; i >= 0; i--) {
                 if (edit[i] != ' ' && edit[i] != '_' && edit[i] != 0x00 && edit[i] != 0xff)
@@ -1277,12 +1277,12 @@ static void MENU_Key_0_to_9(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
 
     gBeepToPlay = BEEP_1KHZ_60MS_OPTIONAL;
     uint8_t now_menu = UI_MENU_GetCurrentMenuId();
-#ifdef ENABLE_MDC1200_EDIT // ‰»Î∑® ˝◊÷
+#ifdef ENABLE_MDC1200_EDIT //ËæìÂÖ•Ê≥ïÊï∞Â≠ó
     uint8_t end_index = now_menu == MENU_MEM_NAME ? MAX_EDIT_INDEX : 4;
 #else
     uint8_t end_index = MAX_EDIT_INDEX;
 #endif
-    if ((now_menu == MENU_MEM_NAME // ‰»Î∑®
+    if ((now_menu == MENU_MEM_NAME //ËæìÂÖ•Ê≥ï
 #ifdef ENABLE_MDC1200
 #ifdef ENABLE_MDC1200_EDIT
                 || now_menu == MENU_MDC_ID
@@ -1302,7 +1302,7 @@ static void MENU_Key_0_to_9(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
 #endif
 #endif
                         if (INPUT_MODE == 0) {
-                            //∆¥“Ù ‰»Î
+                            //ÊãºÈü≥ËæìÂÖ•
                             if (Key >= 2 && PINYIN_CODE_INDEX && INPUT_STAGE <= 1) {
                                 uint32_t tmp = PINYIN_CODE;
                                 PINYIN_CODE += Key * PINYIN_CODE_INDEX;
@@ -1333,12 +1333,12 @@ static void MENU_Key_0_to_9(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
                             }
                         } else if (INPUT_MODE == 1) {
                             if (INPUT_STAGE == 0) {
-                                if (Key >= KEY_2) { //—°‘Ò◊÷ƒ∏∞¥º¸
+                                if (Key >= KEY_2) { //ÈÄâÊã©Â≠óÊØçÊåâÈîÆ
                                     INPUT_STAGE = 1;
                                     INPUT_SELECT = Key;
                                 }
                             } else {
-                                if (Key >= 1 && Key <= 2 *num_size[INPUT_SELECT - 2]) {//—°‘Ò◊÷ƒ∏
+                                if (Key >= 1 && Key <= 2 *num_size[INPUT_SELECT - 2]) {//ÈÄâÊã©Â≠óÊØç
                                     if (edit_chn[edit_index] == 1) edit[edit_index+1] = '_';
                                     if (Key > num_size[INPUT_SELECT - 2])
                                         edit[edit_index] = num_excel[INPUT_SELECT - 2][Key - 1 - num_size[INPUT_SELECT - 2]] - 32;
@@ -1559,7 +1559,7 @@ static void MENU_Key_EXIT(bool bKeyPressed, bool bKeyHeld) {
     }
 #ifdef  ENABLE_PINYIN
 
-//    if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME && gAskForConfirmation == 0) { // ‰»Î∑®exit
+//    if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME && gAskForConfirmation == 0) { //ËæìÂÖ•Ê≥ïexit
 //
 //
 //    }
@@ -1631,7 +1631,7 @@ static void MENU_Key_MENU(const bool bKeyPressed, const bool bKeyHeld) {
 #ifdef ENABLE_PINYIN
     if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME) {
         if (edit_index == -1) {
-            // ‰»Î∑®≤Œ ˝≥ı ºªØmenu
+            //ËæìÂÖ•Ê≥ïÂèÇÊï∞ÂàùÂßãÂåñmenu
             INPUT_MODE = 0;
             INPUT_SELECT = 0;
             INPUT_STAGE = 0;
@@ -1729,7 +1729,7 @@ static void MENU_Key_MENU(const bool bKeyPressed, const bool bKeyHeld) {
 #endif
 
 #endif
-    if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME) { // ‰»Î∑®MENU
+    if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME) { //ËæìÂÖ•Ê≥ïMENU
         if (edit_index < 0) {    // enter channel name edit mode
             if (!RADIO_CheckValidChannel(gSubMenuSelection, false, 0))
                 return;
@@ -1769,7 +1769,7 @@ static void MENU_Key_MENU(const bool bKeyPressed, const bool bKeyHeld) {
             gAskForConfirmation = 0;
         }
     }
-#ifdef ENABLE_PINYIN //ÕÀ≥ˆ ‰»Îƒ£ Ω
+#ifdef ENABLE_PINYIN //ÈÄÄÂá∫ËæìÂÖ•Ê®°Âºè
 
 //    PINYIN_MODE=0;
 #endif
@@ -1840,7 +1840,7 @@ static void MENU_Key_STAR(const bool bKeyPressed, const bool bKeyHeld) {
         return;
 
     gBeepToPlay = BEEP_1KHZ_60MS_OPTIONAL;
-// ‰»Î∑®–«ƒ£ Ω«–ªª
+//ËæìÂÖ•Ê≥ïÊòüÊ®°ÂºèÂàáÊç¢
     if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME && edit_index >= 0) {    // currently editing the channel name
 
         if (edit_index < MAX_EDIT_INDEX) {
@@ -1851,7 +1851,7 @@ static void MENU_Key_STAR(const bool bKeyPressed, const bool bKeyHeld) {
                 gAskForConfirmation = 1;
             }
 
-#else // ‰»Î∑®–«ƒ£ Ω«–ªª
+#else //ËæìÂÖ•Ê≥ïÊòüÊ®°ÂºèÂàáÊç¢
             INPUT_MODE++;
             if (INPUT_MODE >= 3)INPUT_MODE = 0;
             if (INPUT_MODE == 0 && edit_index + 1 >= MAX_EDIT_INDEX)
@@ -1896,15 +1896,15 @@ static void MENU_Key_UP_DOWN(bool bKeyPressed, bool bKeyHeld, int8_t Direction) 
     uint8_t VFO;
     uint8_t Channel;
     bool bCheckScanList;
-    if (gIsInSubMenu && edit_index >= 0) { // ‰»Î∑®UP DOWN
+    if (gIsInSubMenu && edit_index >= 0) { //ËæìÂÖ•Ê≥ïUP DOWN
         if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME) {    // change the character
 
             if (bKeyPressed && edit_index < MAX_EDIT_INDEX) {
-#ifdef  ENABLE_PINYIN//∆¥“Ù…œœ¬
+#ifdef  ENABLE_PINYIN//ÊãºÈü≥‰∏ä‰∏ã
 
                 if (INPUT_MODE == 0) {
                     if (INPUT_STAGE == 2) {
-                        if (PINYIN_SEARCH_MODE == 1)//◊º»∑µƒ◊È∫œ
+                        if (PINYIN_SEARCH_MODE == 1)//ÂáÜÁ°ÆÁöÑÁªÑÂêà
                         {
                             if (Direction == 1) {
                                 if (CHN_NOW_PAGE) CHN_NOW_PAGE--;
@@ -2089,7 +2089,7 @@ void MENU_ProcessKeys(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
             MENU_Key_STAR(bKeyPressed, bKeyHeld);
             break;
         case KEY_F:
-            if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME && // ‰»Î∑®
+            if (UI_MENU_GetCurrentMenuId() == MENU_MEM_NAME && //ËæìÂÖ•Ê≥ï
                 edit_index >= 0) {    // currently editing the channel name
                 if (!bKeyHeld && bKeyPressed) {
                     gBeepToPlay = BEEP_1KHZ_60MS_OPTIONAL;

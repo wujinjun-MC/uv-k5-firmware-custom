@@ -5,7 +5,8 @@
 
 # ---- COMPILER/LINKER OPTIONS ----
 ENABLE_CLANG                  ?= 0
-ENABLE_SWD                    ?= 1
+# MOD
+ENABLE_SWD                    ?= 0
 ENABLE_OVERLAY                ?= 0
 ENABLE_LTO                    ?= 1
 
@@ -13,11 +14,14 @@ ENABLE_LTO                    ?= 1
 ENABLE_UART                   ?= 1
 ENABLE_AIRCOPY                ?= 0
 ENABLE_FMRADIO                = 0
+# MOD
 ENABLE_NOAA                   ?= 0
 ENABLE_VOICE                  ?= 0
 ENABLE_VOX                    ?= 1
-ENABLE_ALARM                  ?= 0
-ENABLE_TX1750                 ?= 0
+# MOD
+ENABLE_ALARM                  ?= 1
+# MOD
+ENABLE_TX1750                 ?= 1
 ENABLE_PWRON_PASSWORD         ?= 0
 ENABLE_DTMF_CALLING           ?= 1
 ENABLE_FLASHLIGHT             ?= 1
@@ -26,11 +30,14 @@ ENABLE_BOOTLOADER			 ?= 0
 ENABLE_BIG_FREQ               ?= 1
 ENABLE_KEEP_MEM_NAME          ?= 1
 ENABLE_WIDE_RX                ?= 1
-ENABLE_TX_WHEN_AM             ?= 0
+# MOD
+ENABLE_TX_WHEN_AM             ?= 1
 ENABLE_F_CAL_MENU             ?= 0
 ENABLE_CTCSS_TAIL_PHASE_SHIFT ?= 0
-ENABLE_BOOT_BEEPS             ?= 0
-ENABLE_SHOW_CHARGE_LEVEL      ?= 0
+# MOD
+ENABLE_BOOT_BEEPS             ?= 1
+# MOD
+ENABLE_SHOW_CHARGE_LEVEL      ?= 1
 ENABLE_REVERSE_BAT_SYMBOL     ?= 0
 ENABLE_NO_CODE_SCAN_TIMEOUT   ?= 1
 ENABLE_AM_FIX                 ?= 1
@@ -38,16 +45,24 @@ ENABLE_SQUELCH_MORE_SENSITIVE ?= 1
 ENABLE_FASTER_CHANNEL_SCAN    ?= 1
 ENABLE_RSSI_BAR               ?= 1
 ENABLE_COPY_CHAN_TO_VFO       ?= 1
-ENABLE_SPECTRUM               = 0
-ENABLE_REDUCE_LOW_MID_TX_POWER?= 0
+# MOD
+ENABLE_SPECTRUM               = 1
+# MOD
+ENABLE_REDUCE_LOW_MID_TX_POWER ?= 1
 ENABLE_BYP_RAW_DEMODULATORS   ?= 0
-ENABLE_BLMIN_TMP_OFF          ?= 0
+# MOD
+ENABLE_BLMIN_TMP_OFF          ?= 1
 ENABLE_SCAN_RANGES            ?= 1
-ENABLE_MDC1200                = 0
-ENABLE_MDC1200_SHOW_OP_ARG    = 0
-ENABLE_MDC1200_SIDE_BEEP      = 0
-ENABLE_MDC1200_CONTACT        = 0
-ENABLE_MDC1200_EDIT			  = 0
+# MOD
+ENABLE_MDC1200                = 1
+# MOD
+ENABLE_MDC1200_SHOW_OP_ARG    = 1
+# MOD
+ENABLE_MDC1200_SIDE_BEEP      = 1
+# MOD
+ENABLE_MDC1200_CONTACT        = 1
+# MOD
+ENABLE_MDC1200_EDIT			  = 1
 ENABLE_UART_RW_BK_REGS 		  ?= 0
 ENABLE_AUDIO_BAR_DEFAULT      ?= 0
 ENABLE_EEPROM_TYPE        	   = 0
@@ -57,7 +72,8 @@ ENABLE_DOCK 		          ?= 0
 ENABLE_CUSTOM_SIDEFUNCTIONS   ?= 1
 ENABLE_SIDEFUNCTIONS_SEND     ?= 1
 ENABLE_BLOCK                  ?= 0
-ENABLE_PINYIN 				   =0
+# MOD
+ENABLE_PINYIN 				   =1
 ENABLE_TURN ?=1
 # ---- DEBUGGING ----
 ENABLE_AM_FIX_SHOW_DATA       ?= 0
@@ -65,9 +81,12 @@ ENABLE_AGC_SHOW_DATA          ?= 0
 ENABLE_TIMER		          ?= 0
 
 ENABLE_WARNING 				  ?= 1
-ENABLE_MESSENGER              			= 0
-ENABLE_MESSENGER_DELIVERY_NOTIFICATION	= 0
-ENABLE_MESSENGER_NOTIFICATION			= 0
+# MOD
+ENABLE_MESSENGER              			= 1
+# MOD
+ENABLE_MESSENGER_DELIVERY_NOTIFICATION	= 1
+# MOD
+ENABLE_MESSENGER_NOTIFICATION			= 1
 ENABLE_4732 =0
 ENABLE_4732SSB =0
 
@@ -76,6 +95,10 @@ ENABLE_DOPPLER               =0
 PACKED_FILE_SUFFIX = LOSEHU132
 ifeq ($(ENABLE_PINYIN),1)
 	ENABLE_CHINESE_FULL=4
+endif
+ifeq ($(ENABLE_NOAA),1)
+	ENABLE_SPECTRUM=0
+	ENABLE_DOPPLER=0
 endif
 
 ifeq ($(ENABLE_DOPPLER),1)
@@ -301,7 +324,7 @@ endif
 OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
-AUTHOR_STRING ?= LOSEHU
+AUTHOR_STRING ?= WJJ
 # the user might not have/want git installed
 # can set own version string here (max 7 chars)
 ifneq (, $(shell $(WHERE) git))

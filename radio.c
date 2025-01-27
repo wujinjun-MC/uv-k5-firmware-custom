@@ -1045,7 +1045,7 @@ void RADIO_PrepareTX(void) {
         else if (gEeprom.TX_TIMEOUT_TIMER < (ARRAY_SIZE(gSubMenu_TOT) - 1))
             gTxTimerCountdown_500ms = 120 * gEeprom.TX_TIMEOUT_TIMER;  // minutes
         else
-            gTxTimerCountdown_500ms = 120 * 15;  // 15 minutes
+            gTxTimerCountdown_500ms = 120 * 30;  // 30 minutes
     }
     gTxTimeoutReached = false;
 

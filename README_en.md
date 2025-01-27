@@ -1,3 +1,18 @@
+**Mod version of LOSEHU**
+
+Mods:
+
+1. Enable/disable build options and change author name in Makefile
+2. Keep transmitting alarm(No switching after about 10 seconds between local and tx mode)
+3. "1750HZ" tone is 500Hz now(for morse code)
+4. Some 500Hz alarm tone is 1000Hz now
+5. Max transmit duration limit 15min->30min
+6. VOX: stop transmitting after 60s silence(for better music transmitting)
+7. Messenger: Re-send last message with down button(C) and long press down button to clear send buffer(without dropping message history)
+8. Windows build batch(win_make.bat): "make full" -> "make build", only build with options in Makefile
+
+Compiled firmware: ./LOSEHU132*.bin
+
 **Read this in other languages: [English](./README_en.md), [中文](./README.md).**
 
 **语言版本: [English](./README_en.md), [中文](./README.md).**

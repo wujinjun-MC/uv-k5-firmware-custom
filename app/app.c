@@ -1178,13 +1178,13 @@ void APP_TimeSlice10ms(void) {
 
                 BK4819_SetScrambleFrequencyControlWord(Tone);
 
-                if (gEeprom.ALARM_MODE == ALARM_MODE_TONE && gAlarmRunningCounter == 512)
+                if (gEeprom.ALARM_MODE == ALARM_MODE_TONE && gAlarmRunningCounter == 65534)
                 {
                     gAlarmRunningCounter = 0;
 
                     if (gAlarmState == ALARM_STATE_TXALARM)
                     {
-gAlarmState = ALARM_STATE_SITE_ALARM;
+                        // gAlarmState = ALARM_STATE_SITE_ALARM;
                         if(gEeprom.TAIL_TONE_ELIMINATION)
                         RADIO_SendCssTail();
                         BK4819_SetupPowerAmplifier(0, 0);
@@ -1799,7 +1799,7 @@ static void ProcessKey(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
                 BK4819_DisableScramble();
 
                 if (Code == 0xFE)
-                    BK4819_TransmitTone(gEeprom.DTMF_SIDE_TONE, 1750);
+                    BK4819_TransmitTone(gEeprom.DTMF_SIDE_TONE, 500);
                 else
                     BK4819_PlayDTMFEx(gEeprom.DTMF_SIDE_TONE, Code);
             }

@@ -324,7 +324,7 @@ void moveUP(char (*rxMessages)[MAX_RX_MSG_LENGTH + 2]) {
     memset(rxMessages[3], 0, sizeof(rxMessages[3]));
 }
 
-void MSG_Send(const char *txMessage, bool bServiceMessage) {
+void MSG_Send(const char *txMessage, bool bServiceMessage, bool bReSend) {
 
     if ( msgStatus != READY ) return;
     stop_mdc_flag=1;
@@ -376,8 +376,12 @@ void MSG_Send(const char *txMessage, bool bServiceMessage) {
 
         enable_msg_rx(true);
         if (!bServiceMessage) {
-            moveUP(rxMessage);
-            sprintf(rxMessage[3], "> %s", txMessage);
+            if (bReSend)
+                sprintf(rxMessage[3], "R>%s", txMessage);
+            else {
+                moveUP(rxMessage);
+                sprintf(rxMessage[3], " >%s", txMessage);
+            }
 //			memset(lastcMessage, 0, sizeof(lastcMessage));
             memcpy(lastcMessage, txMessage, TX_MSG_LENGTH);
             lastcMessage[TX_MSG_LENGTH]=0;
@@ -507,11 +511,16 @@ void  MSG_ProcessKeys(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
                 cMessage[TX_MSG_LENGTH]='\0';
                 cIndex = strlen(cMessage);
                 break;
-            /*case KEY_DOWN:
-                break;*/
+            case KEY_DOWN: //Reload last message and send
+                memcpy(cMessage, lastcMessage, TX_MSG_LENGTH);
+                cMessage[TX_MSG_LENGTH]='\0';
+                cIndex = strlen(cMessage);
+                // Re-send message
+                MSG_Send(cMessage, false, true);
+                break;
             case KEY_MENU:
                 // Send message
-                MSG_Send(cMessage, false);
+                MSG_Send(cMessage, false, false);
                 break;
             case KEY_EXIT:
                 gRequestDisplayScreen = DISPLAY_MAIN;
@@ -529,6 +538,12 @@ void  MSG_ProcessKeys(KEY_Code_t Key, bool bKeyPressed, bool bKeyHeld) {
 
         switch (Key)
         {
+            case KEY_DOWN: //Clear send buffer
+                cMessage[0]=0;
+                prevKey = 0;
+                prevLetter = 0;
+                cIndex = 0;
+                break;
             case KEY_F:
                 MSG_Init();
                 break;
@@ -663,7 +678,7 @@ void solve_sign(const uint16_t interrupt_bits) {
                     moveUP(rxMessage);
                     show_flag=1;
                     snprintf(rxMessage[3], TX_MSG_LENGTH + 2, "< %s", &msgFSKBuffer[2]);
-                    MSG_Send("\x1b\x1b\x1bRCVD", true);
+                    MSG_Send("\x1b\x1b\x1bRCVD", true, false);
 
                 }
 
