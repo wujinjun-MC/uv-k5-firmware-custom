@@ -487,7 +487,8 @@ const char gSubMenu_AM_fix_test1[][8] =
 const char gSubMenu_BATTYP[][8] =
         {
                 "1600mAh",
-                "2200mAh"
+                "2200mAh",
+                "3500mAh"
         };
 
 const char gSubMenu_SCRAMBLER[][7] =

@@ -10,6 +10,8 @@ Mods:
 6. VOX: stop transmitting after 60s silence(for better music transmitting)
 7. Messenger: Re-send last message with down button(C) and long press down button to clear send buffer(without dropping message history)
 8. Windows build batch(win_make.bat): "make full" -> "make build", only build with options in Makefile
+9. Fix ENABLE_DOCK compile error(Fixed by adding only one "#include" line)
+10. Add 3500mAh battery support, from [VE3XLT/uv-k5-firmware-custom](https://github.com/VE3XLT/uv-k5-firmware-custom), not tested
 
 Compiled firmware: ./LOSEHU132*.bin
 

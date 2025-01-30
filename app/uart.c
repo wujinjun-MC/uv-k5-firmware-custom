@@ -39,6 +39,7 @@
 #include "driver/crc.h"
 #include "driver/eeprom.h"
 #include "driver/gpio.h"
+#include "driver/keyboard.h"
 #include "driver/uart.h"
 #include "functions.h"
 #include "misc.h"

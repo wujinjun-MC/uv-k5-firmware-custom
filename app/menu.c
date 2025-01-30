@@ -419,7 +419,7 @@ int MENU_GetLimits(uint8_t menu_id, int32_t *pMin, int32_t *pMax) {
 
         case MENU_BATTYP:
             *pMin = 0;
-            *pMax = 1;
+            *pMax = 2;
             break;
 
 #ifdef ENABLE_CUSTOM_SIDEFUNCTIONS

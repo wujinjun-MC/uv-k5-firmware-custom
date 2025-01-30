@@ -10,6 +10,8 @@
 6. 声控发射: 60秒无声音才停止发射(用于更好发射音乐)
 7. 短信: 短按下(C)键重新发送上一条信息、长按下键清除待发送内容(不丢失短信记录)
 8. Windows编译批处理(win_make.bat): "make full"改成"make build"，只按照Makefile里面的编译选项进行编译
+9. 修复ENABLE_DOCK功能编译错误(加了一行include就解决了)
+10. 添加3500mAh电池支持，搬运自[VE3XLT/uv-k5-firmware-custom](https://github.com/VE3XLT/uv-k5-firmware-custom)，没有测试
 
 已编译固件: ./LOSEHU132*.bin
 
