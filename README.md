@@ -6,14 +6,22 @@
 2. 保持发射报警声(不会每10秒切换本地和远程报警模式)
 3. "1750HZ" 声调改为500Hz(用于莫尔斯电码)
 4. 一些500Hz的警报声现在是1000Hz
-5. 最大发射时间限制从15min改为30min
-6. 声控发射: 60秒无声音才停止发射(用于更好发射音乐)
+5. 最大发射时间限制从15min改为60min (在Makefile启用ENABLE_LONGER_TX_TIMEOUT)
+6. 声控发射: 60秒无声音才停止发射(用于更好发射音乐) (在Makefile启用ENABLE_LONGER_VOX_TIMEOUT)
 7. 短信: 短按下(C)键重新发送上一条信息、长按下键清除待发送内容(不丢失短信记录)
 8. Windows编译批处理(win_make.bat): "make full"改成"make build"，只按照Makefile里面的编译选项进行编译
 9. 修复ENABLE_DOCK功能编译错误(加了一行include就解决了)
 10. 添加3500mAh电池支持，搬运自[VE3XLT/uv-k5-firmware-custom](https://github.com/VE3XLT/uv-k5-firmware-custom)，没有测试
+11. 短信: 删除模拟亚音/数字亚音=0，防止中继丢弃短信 (在Makefile启用ENABLE_MESSENGER_CTCSS_DCS)
+12. 中/低发射功率只减少一点点，高发射功率更高 (在Makefile启用ENABLE_REDUCE_LOW_MID_TX_POWER)
+13. 扫描亚音时只保存到发射亚音 (在Makefile启用ENABLE_SCANNER_SAVE_TXCTCSS_TXDCS_ONLY)
+14. 更窄的窄带(6.25kHz) (在Makefile启用ENABLE_NARROW_BANDWIDTH_NARROWER)
 
 已编译固件: ./LOSEHU132*.bin
+
+计划中:
+
+1. 快速输入频率/频道 例如 VFO: `435``M` -> `435000`  MR: `8``M` -> `008`
 
 **Read this in other languages: [English](./README_en.md), [中文](./README.md).**
 

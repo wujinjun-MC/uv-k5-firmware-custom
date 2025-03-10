@@ -649,7 +649,7 @@ void BK4819_SetFilterBandwidth(const BK4819_FilterBandwidth_t Bandwidth, const b
                         (0u << 0);      //  0
             }
             break;
-
+#ifndef ENABLE_NARROW_BANDWIDTH_NARROWER
         case BK4819_FILTER_BW_NARROW:    // 12.5kHz
             if (weak_no_different) {
                 val =
@@ -673,7 +673,9 @@ void BK4819_SetFilterBandwidth(const BK4819_FilterBandwidth_t Bandwidth, const b
                         (0u << 0);      //  0
             }
             break;
-
+#else
+        case BK4819_FILTER_BW_NARROW:
+#endif
         case BK4819_FILTER_BW_NARROWER:    // 6.25kHz
             if (weak_no_different) {
                 val =
@@ -1915,7 +1917,11 @@ void BK4819_stop_tones(const bool tx)
             switch (m_bandwidth)
             {
                 case BK4819_FILTER_BW_WIDE:     deviation = 1050; break;
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+                case BK4819_FILTER_BW_NARROW:   deviation =  750; break;
+#else
                 case BK4819_FILTER_BW_NARROW:   deviation =  850; break;
+#endif
                 case BK4819_FILTER_BW_NARROWER: deviation =  750; break;
             }
             //BK4819_WriteRegister(0x40, (3u << 12) | (deviation & 0xfff));

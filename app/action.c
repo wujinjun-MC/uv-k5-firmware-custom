@@ -552,7 +552,14 @@ void ACTION_BlminTmpOff(void)
 void ACTION_WIDTH(void) {
     gRequestSaveChannel = 1;
 
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+//     gTxVfo->CHANNEL_BANDWIDTH++;
+//     if(gTxVfo->CHANNEL_BANDWIDTH > BANDWIDTH_NARROWER){
+//         gTxVfo->CHANNEL_BANDWIDTH = 0;
+//     }
+// #else
     gTxVfo->CHANNEL_BANDWIDTH = !gTxVfo->CHANNEL_BANDWIDTH;
+// #endif
 }
 
 void ACTION_D_DCD(void) {

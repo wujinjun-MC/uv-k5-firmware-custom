@@ -187,8 +187,10 @@ static void SCANNER_Key_MENU(bool bKeyPressed, bool bKeyHeld) {
                 RADIO_ConfigureChannel(0, VFO_CONFIGURE_RELOAD);
                 RADIO_ConfigureChannel(1, VFO_CONFIGURE_RELOAD);
 
+#ifndef ENABLE_SCANNER_SAVE_TXCTCSS_TXDCS_ONLY
                 gTxVfo->freq_config_RX.CodeType = gScanCssResultType;
                 gTxVfo->freq_config_RX.Code = gScanCssResultCode;
+#endif
                 gTxVfo->freq_config_TX.CodeType = gScanCssResultType;
                 gTxVfo->freq_config_TX.Code = gScanCssResultCode;
             }

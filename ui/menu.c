@@ -151,20 +151,37 @@ const t_menu_item MenuList[] =
 #ifdef ENABLE_CUSTOM_SIDEFUNCTIONS
 #if ENABLE_CHINESE_FULL==0 || defined(ENABLE_ENGLISH)
 #ifdef ENABLE_ENGLISH
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+// const char gSubMenu_W_N[][9] =//7
+// #else
 const char gSubMenu_W_N[][7] =//7
+// #endif
 
 #else
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+// const char gSubMenu_W_N[][4] =//7
+// #else
 const char gSubMenu_W_N[][3] =//7
+// #endif
 
 #endif
 #else
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+//         const char gSubMenu_W_N[][6] =//7
+// #else
         const char gSubMenu_W_N[][5] =//7
+// #endif
 #endif
         {
 //                "WIDE",
 //                "NARROW"
                 宽带,
-               窄带
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+//                 窄带,
+//                 窄带2
+// #else
+                窄带
+// #endif
         };
 #endif
 #if ENABLE_CHINESE_FULL == 4

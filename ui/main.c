@@ -830,7 +830,11 @@ void UI_DisplayMain(void) {
         }
         {
             // show the narrow band symbol
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+//             if (vfoInfo->CHANNEL_BANDWIDTH == BANDWIDTH_NARROW || vfoInfo->CHANNEL_BANDWIDTH == 2) {
+// #else
             if (vfoInfo->CHANNEL_BANDWIDTH == BANDWIDTH_NARROW) {
+// #endif
 #if ENABLE_CHINESE_FULL != 4 || defined(ENABLE_ENGLISH)
                 UI_PrintStringSmall("N", LCD_WIDTH + 70, 0, line + 1);
 #else

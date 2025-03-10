@@ -6,14 +6,22 @@ Mods:
 2. Keep transmitting alarm(No switching after about 10 seconds between local and tx mode)
 3. "1750HZ" tone is 500Hz now(for morse code)
 4. Some 500Hz alarm tone is 1000Hz now
-5. Max transmit duration limit 15min->30min
-6. VOX: stop transmitting after 60s silence(for better music transmitting)
+5. Max transmit duration limit 15min->60min (Enable ENABLE_LONGER_TX_TIMEOUT in Makefile)
+6. VOX: stop transmitting after 60s silence(for better music transmitting) (Enable ENABLE_LONGER_VOX_TIMEOUT in Makefile)
 7. Messenger: Re-send last message with down button(C) and long press down button to clear send buffer(without dropping message history)
 8. Windows build batch(win_make.bat): "make full" -> "make build", only build with options in Makefile
 9. Fix ENABLE_DOCK compile error(Fixed by adding only one "#include" line)
 10. Add 3500mAh battery support, from [VE3XLT/uv-k5-firmware-custom](https://github.com/VE3XLT/uv-k5-firmware-custom), not tested
+11. Messenger: Remove CTCSS/DCS=0(prevents message rejection by relay) (Enable ENABLE_MESSENGER_CTCSS_DCS in Makefile)
+12. Less decress mid/low transmit power and increase high transmit power (Enable ENABLE_REDUCE_LOW_MID_TX_POWER in Makefile)
+13. Only save TxCTCSS/TxDCS when scanning CTCSS/DCS (Enable ENABLE_SCANNER_SAVE_TXCTCSS_TXDCS_ONLY in Makefile)
+14. Narrower bandwidth(6.25kHz) (Enable ENABLE_NARROW_BANDWIDTH_NARROWER in Makefile)
 
 Compiled firmware: ./LOSEHU132*.bin
+
+Planned:
+
+1. Faster frequency/channel input. Example: VFO: `435``M` -> `435000`  MR: `8``M` -> `008`
 
 **Read this in other languages: [English](./README_en.md), [中文](./README.md).**
 

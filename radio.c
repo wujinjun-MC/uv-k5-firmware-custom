@@ -496,15 +496,20 @@ void RADIO_ConfigureSquelchAndOutputPower(VFO_Info_t *pInfo) {
 
 #ifdef ENABLE_REDUCE_LOW_MID_TX_POWER
     // make low and mid even lower
-    if (pInfo->OUTPUT_POWER == OUTPUT_POWER_LOW) {
-        Txp[0] /= 5;
-        Txp[1] /= 5;
-        Txp[2] /= 5;
+    // if (pInfo->OUTPUT_POWER == OUTPUT_POWER_MID) {
+    //     Txp[0] /= 2;
+    //     Txp[1] /= 2;
+    //     Txp[2] /= 2;
+    // }
+    if (pInfo->OUTPUT_POWER == OUTPUT_POWER_LOW){
+        Txp[0] /= 2;
+        Txp[1] /= 2;
+        Txp[2] /= 2;
     }
-    else if (pInfo->OUTPUT_POWER == OUTPUT_POWER_MID){
-        Txp[0] /= 3;
-        Txp[1] /= 3;
-        Txp[2] /= 3;
+    else if (pInfo->OUTPUT_POWER == OUTPUT_POWER_HIGH){
+        Txp[0] += 30;
+        Txp[1] += 30;
+        Txp[2] += 30;
     }
 #endif
 
@@ -575,8 +580,8 @@ void RADIO_SetupRegisters(bool switchToForeground) {
         default:
             Bandwidth = BK4819_FILTER_BW_WIDE;
             [[fallthrough]];
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
         case BK4819_FILTER_BW_WIDE:
-        case BK4819_FILTER_BW_NARROW:
 #ifdef ENABLE_AM_FIX
             //				BK4819_SetFilterBandwidth(Bandwidth, gRxVfo->Modulation == MODULATION_AM && gSetting_AM_fix);
                 BK4819_SetFilterBandwidth(Bandwidth, true);
@@ -584,6 +589,27 @@ void RADIO_SetupRegisters(bool switchToForeground) {
             BK4819_SetFilterBandwidth(Bandwidth, false);
 #endif
             break;
+        case BK4819_FILTER_BW_NARROW:
+        case BK4819_FILTER_BW_NARROWER:
+#ifdef ENABLE_AM_FIX
+            //				BK4819_SetFilterBandwidth(Bandwidth, gRxVfo->Modulation == MODULATION_AM && gSetting_AM_fix);
+                BK4819_SetFilterBandwidth(BK4819_FILTER_BW_NARROWER, true);
+#else
+            BK4819_SetFilterBandwidth(BK4819_FILTER_BW_NARROWER, false);
+#endif
+            break;
+#else
+        case BK4819_FILTER_BW_WIDE:
+        case BK4819_FILTER_BW_NARROW:
+        case BK4819_FILTER_BW_NARROWER:
+#ifdef ENABLE_AM_FIX
+            //				BK4819_SetFilterBandwidth(Bandwidth, gRxVfo->Modulation == MODULATION_AM && gSetting_AM_fix);
+                BK4819_SetFilterBandwidth(Bandwidth, true);
+#else
+            BK4819_SetFilterBandwidth(Bandwidth, false);
+#endif
+            break;
+#endif
     }
 
     BK4819_ToggleGpioOut(BK4819_GPIO5_PIN1_RED, false);
@@ -817,8 +843,8 @@ void RADIO_SetTxParameters(void) {
         default:
             Bandwidth = BK4819_FILTER_BW_WIDE;
             [[fallthrough]];
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
         case BK4819_FILTER_BW_WIDE:
-        case BK4819_FILTER_BW_NARROW:
 #ifdef ENABLE_AM_FIX
             //				BK4819_SetFilterBandwidth(Bandwidth, gCurrentVfo->Modulation == MODULATION_AM && gSetting_AM_fix);
                 BK4819_SetFilterBandwidth(Bandwidth, true);
@@ -826,6 +852,27 @@ void RADIO_SetTxParameters(void) {
             BK4819_SetFilterBandwidth(Bandwidth, false);
 #endif
             break;
+        case BK4819_FILTER_BW_NARROW:
+        case BK4819_FILTER_BW_NARROWER:
+#ifdef ENABLE_AM_FIX
+            //				BK4819_SetFilterBandwidth(Bandwidth, gCurrentVfo->Modulation == MODULATION_AM && gSetting_AM_fix);
+                BK4819_SetFilterBandwidth(BK4819_FILTER_BW_NARROWER, true);
+#else
+            BK4819_SetFilterBandwidth(BK4819_FILTER_BW_NARROWER, false);
+#endif
+            break;
+#else
+        case BK4819_FILTER_BW_WIDE:
+        case BK4819_FILTER_BW_NARROW:
+        case BK4819_FILTER_BW_NARROWER:
+#ifdef ENABLE_AM_FIX
+            //				BK4819_SetFilterBandwidth(Bandwidth, gCurrentVfo->Modulation == MODULATION_AM && gSetting_AM_fix);
+                BK4819_SetFilterBandwidth(Bandwidth, true);
+#else
+            BK4819_SetFilterBandwidth(Bandwidth, false);
+#endif
+            break;
+#endif
     }
 
     BK4819_SetFrequency(gCurrentVfo->pTX->Frequency);
@@ -1045,7 +1092,11 @@ void RADIO_PrepareTX(void) {
         else if (gEeprom.TX_TIMEOUT_TIMER < (ARRAY_SIZE(gSubMenu_TOT) - 1))
             gTxTimerCountdown_500ms = 120 * gEeprom.TX_TIMEOUT_TIMER;  // minutes
         else
-            gTxTimerCountdown_500ms = 120 * 30;  // 30 minutes
+#ifdef ENABLE_LONGER_TX_TIMEOUT
+            gTxTimerCountdown_500ms = 120 * 60;  // 60 minutes
+#else
+            gTxTimerCountdown_500ms = 120 * 15;  // 15 minutes
+#endif
     }
     gTxTimeoutReached = false;
 

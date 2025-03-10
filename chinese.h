@@ -75,7 +75,11 @@
 #define 七分 "7 min"
 #define 八分 "8 min"
 #define 九分 "9 min"
-#define 十五分 "30 min"
+#ifdef ENABLE_LONGER_TX_TIMEOUT
+#define 十五分 "60 min"
+#else
+#define 十五分 "15 min"
+#endif
 #define 主信道接收发射 "MAIN\nONLY"
 #define 双信道接收 "DUAL RX\nRESPOND"
 #define 主信道发射副信道接收 "CROSS\nBAND"
@@ -146,7 +150,11 @@
 #define 切换宽窄带 "W/N"
 #define 宽窄带 "W/N"
 #define 宽带 "WIDE"
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+#define 窄带 "NARROWER"
+#else
 #define 窄带 "NARROW"
+#endif
 #define 主信道发射 "MAIN SEND"
 #define 副信道发射 "DUAL SEND"
 #define 开机显示 "POnMsg"
@@ -217,7 +225,11 @@
 #define 七分  "\x37\x20\xC6"
 #define 八分  "\x38\x20\xC6"
 #define 九分  "\x39\x20\xC6"
-#define 十五分  "\x33\x30\x20\xC6"
+#ifdef ENABLE_LONGER_TX_TIMEOUT
+#define 十五分  "\x36\x30\x20\xC6"
+#else
+#define 十五分  "\x31\x35\x20\xC6"
+#endif
 #define 主信道接收发射  "\xC7\x1C\x1D\n\x05\x06\x0E\xC8"
 #define 双信道接收  "\xC9\x1C\x1D\n\x05\x06"
 #define 主信道发射副信道接收  "\xC7\x1C\x1D\x0E\xC8\n\xCA\x1C\x1D\x05\x06"
@@ -294,7 +306,11 @@
 #define 切换宽窄带 "\xDD\xDE\xE7\xE8\xE9"
 #define 宽窄带 "\xE7\xE8\xE9"
 #define 宽带 "\xE7\xE9"
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+#define 窄带 "\xE8\xE9\x32"
+#else
 #define 窄带 "\xE8\xE9"
+#endif
 #ifdef ENABLE_SIDEFUNCTIONS_SEND
 #define 主信道发射 "\xC7\x1C\x1D\x0E\xC8"
 #define 副信道发射 "\xCA\x1C\x1D\x0E\xC8"
@@ -374,7 +390,11 @@
 #define 七分 "\x37\x20\xB7\xD6"
 #define 八分 "\x38\x20\xB7\xD6"
 #define 九分 "\x39\x20\xB7\xD6"
-#define 十五分 "\x33\x30\x20\xB7\xD6"
+#ifdef ENABLE_LONGER_TX_TIMEOUT
+#define 十五分 "\x36\x30\x20\xB7\xD6"
+#else
+#define 十五分 "\x31\x35\x20\xB7\xD6"
+#endif
 #define 主信道接收发射 "\xD6\xF7\xD0\xC5\xB5\xC0\n\xBD\xD3\xCA\xD5\xB7\xA2\xC9\xE4"
 #define 双信道接收 "\xCB\xAB\xD0\xC5\xB5\xC0\n\xBD\xD3\xCA\xD5"
 #define 主信道发射副信道接收 "\xD6\xF7\xD0\xC5\xB5\xC0\xB7\xA2\xC9\xE4\n\xB8\xB1\xD0\xC5\xB5\xC0\xBD\xD3\xCA\xD5"
@@ -449,7 +469,11 @@
 #define 切换宽窄带 "\xC7\xD0\xBB\xBB\xBF\xED\xD5\xAD\xB4\xF8"
 #define 宽窄带 "\xBF\xED\xD5\xAD\xB4\xF8"
 #define 宽带 "\xBF\xED\xB4\xF8"
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+#define 窄带 "\xD5\xAD\xB4\xF8\x32"
+#else
 #define 窄带 "\xD5\xAD\xB4\xF8"
+#endif
 #define 主信道发射 "\xD6\xF7\xD0\xC5\xB5\xC0\xB7\xA2\xC9\xE4"
 #define 副信道发射 "\xB8\xB1\xD0\xC5\xB5\xC0\xB7\xA2\xC9\xE4"
 #define 开机显示 "\xBF\xAA\xBB\xFA\xCF\xD4\xCA\xBE"

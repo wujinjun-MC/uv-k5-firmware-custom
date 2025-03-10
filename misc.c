@@ -67,7 +67,11 @@ const uint16_t power_save1_10ms = 100 / 10;   // 100ms
 const uint16_t power_save2_10ms = 200 / 10;   // 200ms
 
 #ifdef ENABLE_VOX
+#ifdef ENABLE_LONGER_VOX_TIMEOUT
 const uint16_t    vox_stop_count_down_10ms         =  60000 / 10;   // 60 second
+#else
+const uint16_t    vox_stop_count_down_10ms         =  1000 / 10;   // 1 second
+#endif
 #endif
 
 const uint16_t NOAA_countdown_10ms = 5000 / 10;   // 5 seconds

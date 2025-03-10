@@ -663,7 +663,7 @@ static void MAIN_Key_UP_DOWN(bool bKeyPressed, bool bKeyHeld, int8_t Direction) 
             BACKLIGHT_TurnOn();
             UI_DisplayClear();
 #ifndef ENABLE_ENGLISH
-//获取数据
+//鑾峰彇鏁版嵁
             UI_PrintStringSmall("\xD0\xB4\xC8\xEB\xCA\xFD\xBE\xDD:", 0, 127, 2);
 #else
             UI_PrintStringSmall("GET DATA:", 0, 127, 2);

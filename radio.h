@@ -30,7 +30,12 @@ enum {
 
 enum {
     BANDWIDTH_WIDE = 0,
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+    BANDWIDTH_NARROW,
+    BANDWIDTH_NARROWER
+#else
     BANDWIDTH_NARROW
+#endif
 };
 
 enum PTT_ID_t {

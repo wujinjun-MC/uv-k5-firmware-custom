@@ -169,12 +169,24 @@ extern const char gSubMenu_SFT_D[3][16];//3
 #ifdef ENABLE_CUSTOM_SIDEFUNCTIONS
 #if ENABLE_CHINESE_FULL == 0 || defined(ENABLE_ENGLISH)
 #ifdef ENABLE_ENGLISH
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+// extern const char        gSubMenu_W_N[3][9];//7
+// #else
 extern const char        gSubMenu_W_N[2][7];//7
+// #endif
 #else
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+// extern const char        gSubMenu_W_N[3][4];//7
+// #else
 extern const char        gSubMenu_W_N[2][3];//7
+// #endif
 #endif
 #else
+// #ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+// extern const char gSubMenu_W_N[3][6];//7
+// #else
 extern const char gSubMenu_W_N[2][5];//7
+// #endif
 #endif
 #endif
 #if ENABLE_CHINESE_FULL != 4 || defined(ENABLE_ENGLISH)

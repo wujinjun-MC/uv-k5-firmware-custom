@@ -72,8 +72,10 @@ void MSG_FSKSendData() {
     // <15>  TxCTCSS/CDCSS   0 = disable 1 = Enable
     //
     // turn off CTCSS/CDCSS during FFSK
+#ifndef ENABLE_MESSENGER_CTCSS_DCS
     const uint16_t css_val = BK4819_ReadRegister(BK4819_REG_51);
-    BK4819_WriteRegister(BK4819_REG_51, 0);
+    BK4819_WriteRegister(BK4819_REG_51, 0); //Causes packet rejection from relay
+#endif
 
     // set the FM deviation level
     const uint16_t dev_val = BK4819_ReadRegister(BK4819_REG_40);
@@ -83,7 +85,11 @@ void MSG_FSKSendData() {
         switch (gEeprom.VfoInfo[gEeprom.TX_VFO].CHANNEL_BANDWIDTH)
         {
             case BK4819_FILTER_BW_WIDE:     deviation = 1050; break;
+#ifdef ENABLE_NARROW_BANDWIDTH_NARROWER
+            case BK4819_FILTER_BW_NARROW:   deviation =  750; break;
+#else
             case BK4819_FILTER_BW_NARROW:   deviation =  850; break;
+#endif
             case BK4819_FILTER_BW_NARROWER: deviation =  750; break;
         }
         //BK4819_WriteRegister(0x40, (3u << 12) | (deviation & 0xfff));
@@ -306,7 +312,9 @@ void MSG_FSKSendData() {
     BK4819_WriteRegister(BK4819_REG_2B, filt_val);
 
     // restore the CTCSS/CDCSS setting
+#ifndef ENABLE_MESSENGER_CTCSS_DCS
     BK4819_WriteRegister(BK4819_REG_51, css_val);
+#endif
 
 }
 
